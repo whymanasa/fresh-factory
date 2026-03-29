@@ -8,10 +8,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
-const GRAIN_BG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E")`
+import { PAPER_STYLE } from "@/lib/design-tokens"
 const INK = "#2A2724"
 const INK_MUTED = "#3D3935"
-const PAPER = "#F7F3EC"
 
 // ── Indian postal stamp ─────────────────────────────────────────────────────
 
@@ -115,25 +114,15 @@ function TextPanel({ children }: { children: React.ReactNode }) {
     <div
       style={{
         position: "relative",
-        backgroundColor: PAPER,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         padding: "clamp(40px,5vw,72px)",
         height: "100%",
         overflow: "hidden",
+        ...PAPER_STYLE
       }}
     >
-      {/* Grain overlay */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: GRAIN_BG,
-          opacity: 0.07,
-          pointerEvents: "none",
-        }}
-      />
       {children}
     </div>
   )
@@ -156,7 +145,7 @@ function SpaceCard() {
           boxShadow: "0 4px 24px rgba(0,0,0,0.10), 0 24px 64px rgba(0,0,0,0.14)",
           borderRadius: "2px",
           overflow: "hidden",
-          backgroundColor: PAPER,
+          backgroundColor: "#FFFFFF",
         }}
       >
         {/* Left — image */}
@@ -217,7 +206,7 @@ function MenuCard() {
           boxShadow: "0 4px 24px rgba(0,0,0,0.12), 0 32px 80px rgba(0,0,0,0.18)",
           borderRadius: "2px",
           overflow: "hidden",
-          backgroundColor: PAPER,
+          backgroundColor: "#FFFFFF",
         }}
       >
         {/* Left — text */}
@@ -369,11 +358,10 @@ export default function StackingCards() {
     <div
       ref={containerRef}
       style={{
-        backgroundColor: PAPER,
-        backgroundImage: GRAIN_BG,
         position: "relative",
         height: "200vh",
-        zIndex: 100 // Covers the previous UnfoldingLetter text
+        zIndex: 100, // Covers the previous UnfoldingLetter text
+        ...PAPER_STYLE
       }}
     >
       <SpaceCard />

@@ -32,7 +32,6 @@ export default function Navbar({ visible }: NavbarProps) {
       if (visible && navRef.current) {
         gsap.to(navRef.current, {
           opacity: 1,
-          y: 0,
           duration: 0.7,
           ease: "power2.out",
         })
@@ -42,24 +41,31 @@ export default function Navbar({ visible }: NavbarProps) {
   )
 
   useEffect(() => {
+    const heroThreshold = 300 // matches ScrollHero scroll travel (calc(100vh + 300px) - 100vh)
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY
 
-      // Determine if scrolled past threshold for background change
       setScrolled(currentScrollY > 50)
 
-      // Hide/Show logic
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        // Scrolling down and past hero
+      // Hide during hero scroll-reveal phase
+      if (currentScrollY < heroThreshold) {
+        setShowNav(false)
+        lastScrollY.current = currentScrollY
+        return
+      }
+
+      // Normal hide-on-down / show-on-up logic after the hero
+      if (currentScrollY > lastScrollY.current && currentScrollY > heroThreshold + 100) {
         setShowNav(false)
       } else {
-        // Scrolling up or at top
         setShowNav(true)
       }
 
       lastScrollY.current = currentScrollY
     }
 
+    handleScroll() // run once on mount to initialize state correctly
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])

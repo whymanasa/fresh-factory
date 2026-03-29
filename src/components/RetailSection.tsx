@@ -2,8 +2,7 @@
 
 import Image from "next/image"
 
-const GRAIN_BG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E")`
-const DUST_BG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Ccircle cx='40' cy='60' r='0.4' fill='%236B6560' opacity='0.22'/%3E%3Ccircle cx='180' cy='20' r='0.6' fill='%236B6560' opacity='0.16'/%3E%3Ccircle cx='320' cy='150' r='0.5' fill='%236B6560' opacity='0.18'/%3E%3Ccircle cx='90' cy='280' r='0.7' fill='%236B6560' opacity='0.14'/%3E%3Ccircle cx='380' cy='360' r='0.5' fill='%236B6560' opacity='0.2'/%3E%3Cpath d='M250,250 Q252,252 251,254' stroke='%236B6560' stroke-width='0.4' opacity='0.15' fill='none'/%3E%3Cpath d='M100,100 Q103,101 101,104' stroke='%236B6560' stroke-width='0.3' opacity='0.12' fill='none'/%3E%3C/svg%3E")`
+import { PAPER_STYLE } from "@/lib/design-tokens"
 
 const PRODUCTS = [
   { name: "Sourdough Boule", price: "₹ 450", src: "/sourdough.png", desc: "Stone-milled, 24hr ferment." },
@@ -16,9 +15,6 @@ export default function RetailSection() {
   return (
     <section
       style={{
-        backgroundColor: "#F7F3EC",
-        backgroundImage: `${DUST_BG}, ${GRAIN_BG}`,
-        backgroundBlendMode: "multiply",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -27,6 +23,7 @@ export default function RetailSection() {
         padding: "80px 24px",
         position: "relative",
         zIndex: 100,
+        ...PAPER_STYLE
       }}
     >
       <div style={{ maxWidth: "1200px", width: "100%" }}>
