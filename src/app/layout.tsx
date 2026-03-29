@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { cormorant, dmSans } from "@/lib/fonts";
 import SiteShell from "@/components/SiteShell";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +20,9 @@ export default function RootLayout({
       className={`${cormorant.variable} ${dmSans.variable}`}
     >
       <body>
-        <SiteShell>{children}</SiteShell>
+        <SmoothScroll>
+          <SiteShell>{children}</SiteShell>
+        </SmoothScroll>
       </body>
     </html>
   );

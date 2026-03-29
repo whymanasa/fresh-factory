@@ -23,6 +23,9 @@ export default function ScrollHero() {
   )
 
   const textOpacity = useTransform(scrollY, [0, 80], [1, 0], { clamp: true })
+  
+  // Parallax effect: image slowly translates downwards as the user scrolls
+  const imageY = useTransform(scrollY, [0, THRESHOLD * 2], ["0%", "7%"])
 
   return (
     // Normal-flow container — height creates the scroll travel for the sticky child
@@ -48,6 +51,8 @@ export default function ScrollHero() {
             height: "100%",
             objectFit: "cover",
             objectPosition: "30% center",
+            scale: 1.15,
+            y: imageY,
             clipPath,
           }}
         />
