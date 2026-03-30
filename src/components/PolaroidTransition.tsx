@@ -62,42 +62,24 @@ export default function PolaroidTransition({ menuSectionRef, farmersSectionRef }
       gsap.set(tape, { opacity: 1 })
 
       // ── PHASE 1: PEEL & FALL ─────────────────────────────────────────
-      // Triggers directly on MenuSection. Starts when MenuSection has scrolled exactly 1.8vh.
-      // Ends 1.0vh later (when MenuSection's bottom hits the viewport bottom).
+      // Tween-based (no scrub). Frame appears automatically the instant the
+      // watermelon card centres — no extra scrolling required.
       const t1 = ScrollTrigger.create({
         trigger: menuOuter,
         start: `top+=${1.8 * vh}px top`,
-        end: `top+=${2.8 * vh}px top`,
-        scrub: true,
         onEnter: () => {
-          // Play the peel/fall and grow-to-video phases automatically
-          // so the user doesn't have to manually scroll 130vh to see it.
-          gsap.to(window, {
-            scrollTo: {
-               y: farmersEl.getBoundingClientRect().top + window.scrollY + (0.32 * window.innerHeight),
-               autoKill: true 
-            },
-            duration: 1.4,
-            ease: "power2.inOut",
-            overwrite: "auto"
+          gsap.to(frame, {
+            opacity: 1, top: finalTop, rotation: -1.5,
+            duration: 0.65, ease: "power2.out", overwrite: "auto",
           })
-        },
-        onUpdate: (self) => {
-          const p = self.progress
-          gsap.set(frame, {
-            opacity: Math.min(p * 10, 1),
-            top: pinTop,
-            rotation: p * -1.5,
-          })
-          gsap.set(tape, { opacity: Math.min(p * 10, 1) * 0.4 })
-        },
-        onLeave: () => {
-          gsap.set(frame, { top: pinTop, rotation: -1.5, opacity: 1 })
-          gsap.set(tape, { opacity: 0.4 })
+          gsap.to(tape, { opacity: 0.4, duration: 0.4, overwrite: "auto" })
         },
         onLeaveBack: () => {
-          gsap.set(frame, { opacity: 0, top: pinTop, rotation: 0 })
-          gsap.set(tape, { opacity: 0 })
+          gsap.to(frame, {
+            opacity: 0, top: pinTop, rotation: 0,
+            duration: 0.4, ease: "power2.in", overwrite: "auto",
+          })
+          gsap.to(tape, { opacity: 0, duration: 0.3, overwrite: "auto" })
         },
       })
       triggers.push(t1)
@@ -117,7 +99,7 @@ export default function PolaroidTransition({ menuSectionRef, farmersSectionRef }
             width: cardW + (finalW - cardW) * p,
             height: cardH + (finalH - cardH) * p,
             left: pinLeft + (finalLeft - pinLeft) * p,
-            top: pinTop + (finalTop - pinTop) * p,
+            top: finalTop,
             rotation: -1.5 * (1 - p),
             borderTopWidth: 16 + (finalBorderSide - 16) * p,
             borderLeftWidth: 16 + (finalBorderSide - 16) * p,
@@ -128,7 +110,7 @@ export default function PolaroidTransition({ menuSectionRef, farmersSectionRef }
         },
         onLeaveBack: () => {
           gsap.set(frame, {
-            top: pinTop, left: pinLeft, width: cardW, height: cardH,
+            top: finalTop, left: pinLeft, width: cardW, height: cardH,
             borderTopWidth: 16, borderLeftWidth: 16,
             borderRightWidth: 16, borderBottomWidth: 48,
             rotation: -1.5,
