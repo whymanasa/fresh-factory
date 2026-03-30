@@ -86,21 +86,45 @@ export default function ContactSection() {
                   src="/wax-seal.png"
                   alt="Fresh Factory Seal"
                   fill
+                  sizes="120px"
                   style={{ objectFit: "contain" }}
                 />
               </motion.div>
             </div>
 
             <form style={{ display: "flex", flexDirection: "column", gap: "38px" }}>
-              {[
-                { label: "Your Name", placeholder: "E.g. Julian Wright" },
-                { label: "Email Address", placeholder: "hello@freshfactory.com" },
-              ].map((field) => (
-                <div key={field.label} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                  <label style={{ fontSize: "9px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.22em", color: "rgba(0,0,0,0.35)" }}>{field.label}</label>
-                  <input 
-                    type="text" 
-                    placeholder={field.placeholder}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px" }}>
+                {[
+                  { label: "Your Name", placeholder: "E.g. Julian Wright", type: "text" },
+                  { label: "Email Address", placeholder: "hello@freshfactory.com", type: "email" },
+                ].map((field) => (
+                  <div key={field.label} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                    <label style={{ fontSize: "9px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.22em", color: "rgba(0,0,0,0.35)" }}>{field.label}</label>
+                    <input 
+                      type={field.type} 
+                      placeholder={field.placeholder}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        borderBottom: "1px solid rgba(0,0,0,0.15)",
+                        paddingBottom: "10px",
+                        fontSize: "15px",
+                        outline: "none",
+                        fontFamily: "var(--font-sans)",
+                        borderRadius: 0,
+                        color: "#1A1714",
+                        width: "100%",
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                  <label style={{ fontSize: "9px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.22em", color: "rgba(0,0,0,0.35)" }}>Your Message</label>
+                  <textarea 
+                    placeholder="Tell us about your event, inquiry, or simply say hello..."
+                    rows={4}
                     style={{
                       background: "transparent",
                       border: "none",
@@ -110,10 +134,13 @@ export default function ContactSection() {
                       outline: "none",
                       fontFamily: "var(--font-sans)",
                       borderRadius: 0,
+                      color: "#1A1714",
+                      resize: "vertical",
+                      width: "100%",
+                      minHeight: "40px"
                     }}
                   />
-                </div>
-              ))}
+              </div>
               
               <button
                 type="submit"
@@ -163,6 +190,7 @@ export default function ContactSection() {
             src="/contact.jpeg"
             alt="Fresh Factory Atmosphere"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             style={{ objectFit: "cover" }}
             priority
           />

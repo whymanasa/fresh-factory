@@ -25,9 +25,9 @@ export default function FarmersSection({ containerRef: externalRef }: FarmersSec
     offset: ["start start", "end end"],
   })
 
-  // Text split — speed up
-  const leftX  = useTransform(scrollYProgress, [0.0, 0.3], [-20, -700])
-  const rightX = useTransform(scrollYProgress, [0.0, 0.3], [20, 700])
+  // Text split — speed up and start further apart so they clear the polaroid
+  const leftX  = useTransform(scrollYProgress, [0.0, 0.3], [-180, -900])
+  const rightX = useTransform(scrollYProgress, [0.0, 0.3], [180, 900])
 
   // Viewfinder & quote — revealed after video is fully grown
   const uiOpacity = useTransform(scrollYProgress, [0.35, 0.5], [0, 1])
@@ -103,7 +103,7 @@ export default function FarmersSection({ containerRef: externalRef }: FarmersSec
           }}
         >
           <span style={{ fontSize: "11px", letterSpacing: "0.5em", textTransform: "uppercase", opacity: 0.4, color: "#2A2724" }}>
-            Part Two: The Harvest
+            Conscious Choices
           </span>
         </motion.div>
 
@@ -122,7 +122,7 @@ export default function FarmersSection({ containerRef: externalRef }: FarmersSec
           <motion.h2
             style={{
               fontFamily: "var(--font-serif)",
-              fontSize: "clamp(24px, 5.5vw, 64px)",
+              fontSize: "clamp(20px, 4vw, 42px)", // Smaller font
               fontWeight: 300,
               color: "#2A2724",
               position: "absolute",
@@ -136,9 +136,7 @@ export default function FarmersSection({ containerRef: externalRef }: FarmersSec
             The hands behind
           </motion.h2>
 
-          {/* Bare video — no polaroid wrapper.
-              Starts at polaroid size, grows to a larger comfortable view.
-              The ghost polaroid frame (PolaroidTransition) descends and wraps it. */}
+          {/* Bare video */}
           <motion.div
             style={{
               width: videoWidth,
@@ -177,7 +175,7 @@ export default function FarmersSection({ containerRef: externalRef }: FarmersSec
           <motion.h2
             style={{
               fontFamily: "var(--font-serif)",
-              fontSize: "clamp(24px, 5.5vw, 64px)",
+              fontSize: "clamp(20px, 4vw, 42px)", // Smaller font
               fontWeight: 300,
               color: "#2A2724",
               position: "absolute",
@@ -188,7 +186,7 @@ export default function FarmersSection({ containerRef: externalRef }: FarmersSec
               zIndex: 20,
             }}
           >
-            the list.
+            every choice.
           </motion.h2>
         </div>
 
@@ -204,8 +202,9 @@ export default function FarmersSection({ containerRef: externalRef }: FarmersSec
             textAlign: "center",
           }}
         >
-          <p style={{ fontFamily: "var(--font-serif)", fontSize: "22px", fontStyle: "italic", opacity: 0.85, lineHeight: 1.4, color: "#2A2724" }}>
-            "None of this exists without them."
+          <p style={{ fontFamily: "var(--font-serif)", fontSize: "20px", fontStyle: "italic", opacity: 0.85, lineHeight: 1.45, color: "#2A2724" }}>
+            "We know the farm behind every ingredient we serve. 
+            Because we are nothing without the farmers who grow them."
           </p>
         </motion.div>
       </div>

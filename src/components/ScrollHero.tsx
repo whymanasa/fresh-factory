@@ -1,26 +1,75 @@
 "use client"
 
 import { motion } from "motion/react"
+import { useState, useEffect } from "react"
 import { PAPER_STYLE } from "@/lib/design-tokens"
+
+function TypewriterText({ strings, delay = 0 }: { strings: string[], delay?: number }) {
+    const [text, setText] = useState("")
+    const [index, setIndex] = useState(0)
+    const [isDeleting, setIsDeleting] = useState(false)
+    const [hasStarted, setHasStarted] = useState(false)
+
+    useEffect(() => {
+        let timeout: NodeJS.Timeout
+
+        if (!hasStarted) {
+            timeout = setTimeout(() => setHasStarted(true), delay)
+            return () => clearTimeout(timeout)
+        }
+
+        const currentString = strings[index]
+
+        if (isDeleting) {
+            timeout = setTimeout(() => {
+                setText(currentString.substring(0, text.length - 1))
+                if (text.length === 1) {
+                    setIsDeleting(false)
+                    setIndex((prev) => (prev + 1) % strings.length)
+                }
+            }, 30)
+        } else {
+            if (text === currentString) {
+                timeout = setTimeout(() => setIsDeleting(true), 4000)
+            } else {
+                timeout = setTimeout(() => {
+                    setText(currentString.substring(0, text.length + 1))
+                }, Math.random() * 40 + 40)
+            }
+        }
+
+        return () => clearTimeout(timeout)
+    }, [text, isDeleting, hasStarted, index, strings, delay])
+
+    return (
+        <span>
+            {text}
+            <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+            >
+                |
+            </motion.span>
+        </span>
+    )
+}
 
 export default function ScrollHero() {
     return (
         <div style={{ height: "100vh", width: "100%", position: "relative", overflow: "hidden", ...PAPER_STYLE }}>
-            {/* Image Wrapper with Wonky Zigzag Edge */}
+            {/* Image Wrapper without Zigzag Edge, full viewport height */}
             <div
                 style={{
                     position: "absolute",
                     top: 0,
                     left: 0,
                     width: "100%",
-                    height: "60vh",
+                    height: "100vh", // Full viewport height
                     zIndex: 1,
-                    // A highly irregular polygon to simulate a torn/rocky edge:
-                    clipPath: "polygon(0 0, 100% 0, 100% 88%, 99% 96%, 97.5% 85%, 96% 93%, 94% 100%, 92.5% 87%, 91% 94%, 89% 84%, 87% 99%, 85% 90%, 83% 95%, 81% 83%, 79% 100%, 78% 92%, 76% 97%, 74% 85%, 72% 94%, 70% 82%, 68% 99%, 67% 90%, 65% 96%, 63% 86%, 61% 100%, 59% 91%, 57% 98%, 55% 84%, 53% 93%, 51% 81%, 49% 100%, 47% 92%, 45% 97%, 43% 86%, 41% 95%, 39% 83%, 37% 99%, 35% 89%, 33% 96%, 31% 85%, 29% 100%, 28% 91%, 26% 98%, 24% 84%, 22% 93%, 20% 82%, 18% 100%, 16% 89%, 14% 96%, 12% 85%, 10% 94%, 8% 81%, 6% 99%, 4% 92%, 2% 97%, 0 88%)"
                 }}
             >
                 <img
-                    src="/landd.JPG.jpeg"
+                    src="/landd.png"
                     alt="The Fresh Factory storefront"
                     style={{
                         position: "absolute",
@@ -31,30 +80,70 @@ export default function ScrollHero() {
                         objectPosition: "30% center",
                     }}
                 />
-                {/* Dark overlay */}
-                <div
-                    style={{
-                        position: "absolute",
-                        inset: 0,
-                        backgroundColor: "rgba(0, 0, 0, 0.3)", // Not so strong dark overlay
-                    }}
-                />
             </div>
 
-            {/* Center Logo */}
+            {/* Editorial Footer on the Paper Texture at bottom of Landing Page */}
             <div
                 style={{
                     position: "absolute",
-                    inset: 0,
+                    bottom: "5vh",
+                    left: "48px",
+                    right: "48px",
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    pointerEvents: "none",
-                    zIndex: 10
+                    justifyContent: "space-between",
+                    alignItems: "flex-end",
+                    zIndex: 10,
                 }}
             >
-
+                <div style={{ maxWidth: "600px" }}>
+                    <p style={{
+                        fontFamily: "'Courier New', Courier, monospace", // Typewriter style
+                        fontSize: "clamp(18px, 2vw, 28px)", // Much bigger
+                        lineHeight: 1.4,
+                        margin: 0,
+                        fontWeight: 600, // Bold
+                        color: "#000000",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.06em",
+                    }}>
+                        A clean eating ecosystem.<br />
+                        <TypewriterText 
+                            strings={["Constantly seeking fresh energies!!", "Trust the process, not the processed.", "An ingredient-first destination."]} 
+                            delay={3000} 
+                        />
+                    </p>
+                    <div style={{
+                        marginTop: "24px",
+                        fontFamily: "'Courier New', Courier, monospace",
+                        fontSize: "clamp(14px, 1.2vw, 18px)",
+                        fontWeight: 600,
+                        color: "#000000",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.15em",
+                    }}>
+                        Bangalore | Lucknow
+                    </div>
+                </div>
+                <motion.div
+                    initial={{ opacity: 0, x: 60 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1.4, delay: 3.2, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    <img
+                        src="/logo.png"
+                        alt="The Fresh Factory"
+                        style={{
+                            height: "clamp(75px, 9vw, 120px)", // Reduced logo size slightly
+                            width: "auto",
+                            filter: "brightness(0)",
+                            objectFit: "contain",
+                            marginBottom: "10px"
+                        }}
+                    />
+                </motion.div>
             </div>
+
+
         </div>
     )
 }

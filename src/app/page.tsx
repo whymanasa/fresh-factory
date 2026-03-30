@@ -6,7 +6,7 @@ import MenuSection from "@/components/MenuSection";
 import FarmersSection from "@/components/FarmersSection";
 import PolaroidTransition from "@/components/PolaroidTransition";
 import RetailSection from "@/components/RetailSection";
-import UnfoldingLetter from "@/components/UnfoldingLetter";
+import EnvelopeLetter from "@/components/EnvelopeLetter";
 import ScrollHero from "@/components/ScrollHero";
 import ContactSection from "@/components/ContactSection";
 
@@ -18,8 +18,7 @@ export default function Home() {
     <>
       <ScrollHero />
 
-      {/* ── CINEMATIC UNFOLDING LETTER ── */}
-      <UnfoldingLetter />
+      <EnvelopeLetter />
 
       <StackingCards />
 

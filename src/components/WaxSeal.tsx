@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, MotionValue, useScroll, useTransform } from "motion/react"
+import { motion, MotionValue, useScroll, useSpring, useTransform } from "motion/react"
 import { useRef } from "react"
 
 interface WaxSealProps {
@@ -19,8 +19,9 @@ export default function WaxSeal({ standalone = true, progress }: WaxSealProps) {
 
   const activeProgress = progress || localProgress
 
-  // Rotate based on progress
-  const rotate = useTransform(activeProgress, [0, 1], [-20, 45])
+  // Rotate based on progress — wrapped in a spring for "buttery" smoothness
+  const rotateTransform = useTransform(activeProgress, [0, 1], [-20, 45])
+  const rotate = useSpring(rotateTransform, { damping: 20, stiffness: 80, mass: 0.5 })
 
   const containerStyle: React.CSSProperties = standalone ? {
     position: "absolute",

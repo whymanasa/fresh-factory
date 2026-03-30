@@ -9,87 +9,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 import { PAPER_STYLE } from "@/lib/design-tokens"
+import IndiaPostStamp from "./IndiaPostStamp"
+
 const INK = "#2A2724"
 const INK_MUTED = "#3D3935"
-
-// ── Indian postal stamp ─────────────────────────────────────────────────────
-
-function IndiaPostStamp({ variant }: { variant: "space" | "menu" }) {
-  const panelColor = variant === "space" ? "#C8503A" : "#1B4F8A"
-
-  return (
-    <div
-      style={{
-        display: "inline-block",
-        transform: variant === "space" ? "rotate(3deg)" : "rotate(-2.5deg)",
-        filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.25))",
-      }}
-    >
-      <svg width="80" height="96" viewBox="0 0 80 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Stamp body */}
-        <rect width="80" height="96" fill="#F5EDD8" rx="1" />
-
-        {/* Perforated top edge */}
-        {Array.from({ length: 9 }, (_, i) => (
-          <circle key={`t${i}`} cx={5 + i * 8.75} cy={4} r={3} fill="#C2BDB8" />
-        ))}
-        {/* Perforated bottom edge */}
-        {Array.from({ length: 9 }, (_, i) => (
-          <circle key={`b${i}`} cx={5 + i * 8.75} cy={92} r={3} fill="#C2BDB8" />
-        ))}
-        {/* Perforated left edge */}
-        {Array.from({ length: 11 }, (_, i) => (
-          <circle key={`l${i}`} cx={4} cy={5 + i * 8.36} r={3} fill="#C2BDB8" />
-        ))}
-        {/* Perforated right edge */}
-        {Array.from({ length: 11 }, (_, i) => (
-          <circle key={`r${i}`} cx={76} cy={5 + i * 8.36} r={3} fill="#C2BDB8" />
-        ))}
-
-        {/* Inner panel */}
-        <rect x="9" y="9" width="62" height="78" fill={panelColor} rx="1" />
-
-        {/* INDIA POST */}
-        <text x="40" y="19" textAnchor="middle" fill="#F5EDD8" fontFamily="serif" fontSize="6" letterSpacing="1.5">
-          INDIA POST
-        </text>
-
-        {/* Central motif */}
-        {variant === "space" ? (
-          /* Coffee cup */
-          <g transform="translate(18, 24)">
-            <rect x="4" y="8" width="26" height="18" rx="1" fill="none" stroke="#F5EDD8" strokeWidth="1.5" />
-            <path d="M30 12 Q38 12 38 17 Q38 22 30 22" fill="none" stroke="#F5EDD8" strokeWidth="1.5" />
-            <ellipse cx="17" cy="28" rx="18" ry="3" fill="none" stroke="#F5EDD8" strokeWidth="1.2" />
-            <path d="M10 6 Q12 2 10 -2" fill="none" stroke="#F5EDD8" strokeWidth="1" opacity="0.8" />
-            <path d="M17 4 Q19 0 17 -4" fill="none" stroke="#F5EDD8" strokeWidth="1" opacity="0.8" />
-            <path d="M24 6 Q26 2 24 -2" fill="none" stroke="#F5EDD8" strokeWidth="1" opacity="0.8" />
-          </g>
-        ) : (
-          /* Lotus */
-          <g transform="translate(40, 55)">
-            <ellipse cx="0" cy="0" rx="5" ry="12" fill="none" stroke="#F5EDD8" strokeWidth="1.2" />
-            <ellipse cx="-8" cy="2" rx="4" ry="10" fill="none" stroke="#F5EDD8" strokeWidth="1.2" transform="rotate(-25)" />
-            <ellipse cx="8" cy="2" rx="4" ry="10" fill="none" stroke="#F5EDD8" strokeWidth="1.2" transform="rotate(25)" />
-            <ellipse cx="-14" cy="6" rx="3.5" ry="8" fill="none" stroke="#F5EDD8" strokeWidth="1" transform="rotate(-50)" />
-            <ellipse cx="14" cy="6" rx="3.5" ry="8" fill="none" stroke="#F5EDD8" strokeWidth="1" transform="rotate(50)" />
-            <line x1="0" y1="12" x2="0" y2="22" stroke="#F5EDD8" strokeWidth="1.2" />
-            <line x1="-6" y1="18" x2="6" y2="18" stroke="#F5EDD8" strokeWidth="1" />
-          </g>
-        )}
-
-        {/* Rule + value */}
-        <line x1="12" y1="72" x2="68" y2="72" stroke="#F5EDD8" strokeWidth="0.5" opacity="0.6" />
-        <text x="40" y="81" textAnchor="middle" fill="#F5EDD8" fontFamily="serif" fontSize="7" letterSpacing="0.5">
-          ₹ 5
-        </text>
-        <text x="40" y="89" textAnchor="middle" fill="#F5EDD8" fontFamily="sans-serif" fontSize="5" letterSpacing="1" opacity="0.8">
-          BHARAT
-        </text>
-      </svg>
-    </div>
-  )
-}
 
 // ── Postmark ────────────────────────────────────────────────────────────────
 
@@ -130,8 +53,6 @@ function TextPanel({ children }: { children: React.ReactNode }) {
 
 // ── Space card (image left, text right) ─────────────────────────────────────
 
-// ── Space card (image left, text right) ─────────────────────────────────────
-
 function SpaceCard() {
   return (
     <div style={{ position: "sticky", top: 0, height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1 }}>
@@ -165,15 +86,14 @@ function SpaceCard() {
             <IndiaPostStamp variant="space" />
           </div>
 
-          <span style={labelStyle}>The Space</span>
+          <span style={labelStyle}>The Philosophy</span>
 
           <h2 style={headingStyle}>
-            Come for the light.<br />Stay for the food.
+            Trust the process.<br />Not the processed.
           </h2>
 
           <p style={bodyStyle}>
-            The space was built to feel like somewhere between a warehouse and a home kitchen.
-            Exposed concrete, open shelves, the smell of something roasting. Come early. Stay late.
+            We believe in complete transparency across all verticals. Our cafe and adjoining retail store highlight the very ingredients we use, offering conscious choices you can trace back to the farm.
           </p>
 
           <div style={{ position: "absolute", bottom: "clamp(12px,2vw,24px)", left: "clamp(12px,2vw,24px)" }}>
@@ -189,9 +109,9 @@ function SpaceCard() {
 
 function MenuCard() {
   const items = [
-    { time: "MORNING", dish: "Sourdough & Cultured Butter", note: "Stone-milled flour, slow-fermented overnight." },
-    { time: "MIDDAY", dish: "Roast Veg Bowl", note: "Whatever came in from the farm that week." },
-    { time: "EVENING", dish: "Cold Brew Old Fashioned", note: "Local single-origin, long-steeped." },
+    { time: "SOURCING", dish: "Bioavailable Nutrition", note: "Ingredients that your body can easily absorb and utilize." },
+    { time: "STANDARDS", dish: "Ethical Poultry", note: "Cruelty-free, consciously raised, and full of honest flavor." },
+    { time: "PROMISE", dish: "Enhance, Never Mask", note: "Every dish is meticulously created to highlight its natural ingredients." },
   ]
 
   return (
@@ -215,7 +135,7 @@ function MenuCard() {
             <IndiaPostStamp variant="menu" />
           </div>
 
-          <span style={labelStyle}>A Note on the Menu</span>
+          <span style={labelStyle}>Our Commitment</span>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "clamp(18px,2.5vw,28px)", marginBottom: "clamp(24px,3vw,36px)" }}>
             {items.map(({ time, dish, note }) => (
@@ -229,7 +149,7 @@ function MenuCard() {
 
           <div style={{ height: "1px", backgroundColor: "#6B6560", opacity: 0.2, marginBottom: "16px" }} />
           <p style={footerStyle}>
-            The board changes. The commitment doesn&apos;t.
+            Serving nutrition. Every ingredient is a conscious choice.
           </p>
 
           <div style={{ position: "absolute", bottom: "clamp(12px,2vw,24px)", left: "clamp(12px,2vw,24px)" }}>
@@ -342,7 +262,6 @@ export default function StackingCards() {
           end: "bottom bottom",
           scrub: true,
           onUpdate: (self) => {
-            // Subtle scale down as more cards come up
             gsap.set(card, {
               scale: 1 - self.progress * 0.05,
               opacity: 1 - self.progress * 0.1,
@@ -359,14 +278,15 @@ export default function StackingCards() {
       ref={containerRef}
       style={{
         position: "relative",
-        height: "200vh",
-        zIndex: 100, // Covers the previous UnfoldingLetter text
-        ...PAPER_STYLE
+        height: "300vh",
+        zIndex: 100,
+        marginTop: "-150vh"
       }}
     >
+      {/* 100vh spacer — transparent, lets envelope show through while SpaceCard scrolls in */}
+      <div style={{ height: "100vh" }} />
       <SpaceCard />
       <MenuCard />
     </div>
   )
 }
-
