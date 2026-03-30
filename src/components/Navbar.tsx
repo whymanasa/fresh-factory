@@ -30,10 +30,13 @@ export default function Navbar({ visible }: NavbarProps) {
   useGSAP(
     () => {
       if (visible && navRef.current) {
-        gsap.to(navRef.current, {
+        // Animate the links into view instead of the entire nav
+        gsap.to(".nav-links", {
           opacity: 1,
-          duration: 0.7,
+          duration: 0.8,
           ease: "power2.out",
+          stagger: 0.1,
+          clearProps: "opacity", // ONLY clear opacity, not the gap or display
         })
       }
     },
@@ -41,22 +44,13 @@ export default function Navbar({ visible }: NavbarProps) {
   )
 
   useEffect(() => {
-    const heroThreshold = 300 // matches ScrollHero scroll travel (calc(100vh + 300px) - 100vh)
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY
 
       setScrolled(currentScrollY > 50)
 
-      // Hide during hero scroll-reveal phase
-      if (currentScrollY < heroThreshold) {
-        setShowNav(false)
-        lastScrollY.current = currentScrollY
-        return
-      }
-
-      // Normal hide-on-down / show-on-up logic after the hero
-      if (currentScrollY > lastScrollY.current && currentScrollY > heroThreshold + 100) {
+      // Only apply hide logic if the user has scrolled past a small threshold
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setShowNav(false)
       } else {
         setShowNav(true)
@@ -79,21 +73,23 @@ export default function Navbar({ visible }: NavbarProps) {
         left: 0,
         right: 0,
         zIndex: 100,
-        opacity: 0,
+        // The navbar itself is visible exactly when "visible" is true.
+        // Before that it's invisible to avoid overlap during the sweeping loader
+        opacity: visible ? 1 : 0,
         transform: `translateY(${showNav ? "0" : "-100%"})`,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         padding: "28px 48px",
-        transition: "background 0.4s ease, backdrop-filter 0.4s ease, transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s ease",
+        transition: "background 0.4s ease, backdrop-filter 0.4s ease, transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1)",
         background: scrolled ? "rgba(0, 0, 0, 0.7)" : "transparent",
         backdropFilter: scrolled ? "blur(20px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
-        pointerEvents: showNav ? "auto" : "none",
+        pointerEvents: showNav && visible ? "auto" : "none",
       }}
     >
       {/* Left links */}
-      <div style={{ display: "flex", gap: "40px" }}>
+      <div className="nav-links" style={{ display: "flex", gap: "64px", opacity: 0 }}>
         {NAV_LINKS_LEFT.map((link) => (
           <Link key={link.label} href={link.href} style={linkStyle}>
             {link.label}
@@ -117,7 +113,7 @@ export default function Navbar({ visible }: NavbarProps) {
       </div>
 
       {/* Right links */}
-      <div style={{ display: "flex", gap: "40px" }}>
+      <div className="nav-links" style={{ display: "flex", gap: "64px", opacity: 0 }}>
         {NAV_LINKS_RIGHT.map((link) => (
           <Link key={link.label} href={link.href} style={linkStyle}>
             {link.label}
@@ -139,3 +135,4 @@ const linkStyle: React.CSSProperties = {
   opacity: 0.8,
   transition: "opacity 0.2s ease",
 }
+

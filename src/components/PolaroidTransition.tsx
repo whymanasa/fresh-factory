@@ -3,8 +3,9 @@
 import { useRef, useEffect } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 interface PolaroidTransitionProps {
   menuSectionRef: React.RefObject<HTMLDivElement | null>
@@ -68,6 +69,19 @@ export default function PolaroidTransition({ menuSectionRef, farmersSectionRef }
         start: `top+=${1.8 * vh}px top`,
         end: `top+=${2.8 * vh}px top`,
         scrub: true,
+        onEnter: () => {
+          // Play the peel/fall and grow-to-video phases automatically
+          // so the user doesn't have to manually scroll 130vh to see it.
+          gsap.to(window, {
+            scrollTo: {
+               y: farmersEl.getBoundingClientRect().top + window.scrollY + (0.32 * window.innerHeight),
+               autoKill: true 
+            },
+            duration: 1.4,
+            ease: "power2.inOut",
+            overwrite: "auto"
+          })
+        },
         onUpdate: (self) => {
           const p = self.progress
           gsap.set(frame, {
@@ -90,11 +104,11 @@ export default function PolaroidTransition({ menuSectionRef, farmersSectionRef }
 
       // ── PHASE 3: GROW WITH VIDEO ───────────────────────────────────────────
       // Triggers directly on FarmersSection. 
-      // Framer Motion useScroll starts when FarmersSection top hits viewport top.
+      // FarmersSection height is 200vh, so scroll distance is 1.0vh
       const t3 = ScrollTrigger.create({
         trigger: farmersEl,
-        start: `top+=${0.05 * 2.5 * vh}px top`,
-        end: `top+=${0.45 * 2.5 * vh}px top`,
+        start: `top top`,
+        end: `top+=${0.30 * vh}px top`,
         scrub: true,
         onUpdate: (self) => {
           const p = self.progress
@@ -127,8 +141,8 @@ export default function PolaroidTransition({ menuSectionRef, farmersSectionRef }
       // ── PHASE 4: FADE OUT ──────────────────────────────────────────────────
       const t4 = ScrollTrigger.create({
         trigger: farmersEl,
-        start: `top+=${0.55 * 2.5 * vh}px top`,
-        end: `top+=${0.80 * 2.5 * vh}px top`,
+        start: `top+=${0.35 * vh}px top`,
+        end: `top+=${0.50 * vh}px top`,
         scrub: true,
         onUpdate: (self) => {
           const p = self.progress

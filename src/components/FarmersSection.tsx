@@ -25,17 +25,16 @@ export default function FarmersSection({ containerRef: externalRef }: FarmersSec
     offset: ["start start", "end end"],
   })
 
-  // Text split — unchanged
-  const leftX  = useTransform(scrollYProgress, [0.05, 0.45], [-20, -700])
-  const rightX = useTransform(scrollYProgress, [0.05, 0.45], [20, 700])
-
+  // Text split — speed up
+  const leftX  = useTransform(scrollYProgress, [0.0, 0.3], [-20, -700])
+  const rightX = useTransform(scrollYProgress, [0.0, 0.3], [20, 700])
 
   // Viewfinder & quote — revealed after video is fully grown
-  const uiOpacity = useTransform(scrollYProgress, [0.5, 0.7], [0, 1])
-  const quoteY    = useTransform(scrollYProgress, [0.5, 0.7], [20, 0])
+  const uiOpacity = useTransform(scrollYProgress, [0.35, 0.5], [0, 1])
+  const quoteY    = useTransform(scrollYProgress, [0.35, 0.5], [20, 0])
 
   // Story intro bridge fades out early
-  const bridgeOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0])
+  const bridgeOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0])
 
   // Video dimensions: grow from polaroid size → large comfortable view
   // Stored in a ref so we read window once on mount and reuse every frame
@@ -59,13 +58,13 @@ export default function FarmersSection({ containerRef: externalRef }: FarmersSec
 
   const videoWidth = useTransform(scrollYProgress, (p) => {
     const { startW, endW } = dimsRef.current
-    const t = Math.max(0, Math.min(1, (p - 0.05) / 0.40))
+    const t = Math.max(0, Math.min(1, (p - 0.0) / 0.30))
     return `${startW + (endW - startW) * t}px`
   })
 
   const videoHeight = useTransform(scrollYProgress, (p) => {
     const { startH, endH } = dimsRef.current
-    const t = Math.max(0, Math.min(1, (p - 0.05) / 0.40))
+    const t = Math.max(0, Math.min(1, (p - 0.0) / 0.30))
     return `${startH + (endH - startH) * t}px`
   })
 
@@ -73,7 +72,7 @@ export default function FarmersSection({ containerRef: externalRef }: FarmersSec
     <section
       ref={setContainerRef}
       style={{
-        height: "350vh",
+        height: "200vh",
         position: "relative",
         zIndex: 100,
         ...PAPER_STYLE,

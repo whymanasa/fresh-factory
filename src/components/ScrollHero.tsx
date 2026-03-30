@@ -1,109 +1,60 @@
 "use client"
 
-import { useEffect } from "react"
-import { motion, useMotionValue, useTransform } from "motion/react"
-
-const THRESHOLD = 300 // px of scroll = sticky zone travel
+import { motion } from "motion/react"
+import { PAPER_STYLE } from "@/lib/design-tokens"
 
 export default function ScrollHero() {
-  const scrollY = useMotionValue(0)
+    return (
+        <div style={{ height: "100vh", width: "100%", position: "relative", overflow: "hidden", ...PAPER_STYLE }}>
+            {/* Image Wrapper with Wonky Zigzag Edge */}
+            <div
+                style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "60vh",
+                    zIndex: 1,
+                    // A highly irregular polygon to simulate a torn/rocky edge:
+                    clipPath: "polygon(0 0, 100% 0, 100% 88%, 99% 96%, 97.5% 85%, 96% 93%, 94% 100%, 92.5% 87%, 91% 94%, 89% 84%, 87% 99%, 85% 90%, 83% 95%, 81% 83%, 79% 100%, 78% 92%, 76% 97%, 74% 85%, 72% 94%, 70% 82%, 68% 99%, 67% 90%, 65% 96%, 63% 86%, 61% 100%, 59% 91%, 57% 98%, 55% 84%, 53% 93%, 51% 81%, 49% 100%, 47% 92%, 45% 97%, 43% 86%, 41% 95%, 39% 83%, 37% 99%, 35% 89%, 33% 96%, 31% 85%, 29% 100%, 28% 91%, 26% 98%, 24% 84%, 22% 93%, 20% 82%, 18% 100%, 16% 89%, 14% 96%, 12% 85%, 10% 94%, 8% 81%, 6% 99%, 4% 92%, 2% 97%, 0 88%)"
+                }}
+            >
+                <img
+                    src="/landd.JPG.jpeg"
+                    alt="The Fresh Factory storefront"
+                    style={{
+                        position: "absolute",
+                        inset: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "30% center",
+                    }}
+                />
+                {/* Dark overlay */}
+                <div
+                    style={{
+                        position: "absolute",
+                        inset: 0,
+                        backgroundColor: "rgba(0, 0, 0, 0.3)", // Not so strong dark overlay
+                    }}
+                />
+            </div>
 
-  useEffect(() => {
-    const onScroll = () => scrollY.set(window.scrollY)
-    window.addEventListener("scroll", onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [scrollY])
+            {/* Center Logo */}
+            <div
+                style={{
+                    position: "absolute",
+                    inset: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    pointerEvents: "none",
+                    zIndex: 10
+                }}
+            >
 
-  const clipPath = useTransform(
-    scrollY,
-    [0, THRESHOLD],
-    ["inset(55% 43% 5% 15%)", "inset(0% 0% 0% 0%)"],
-    { clamp: true }
-  )
-
-  const textOpacity = useTransform(scrollY, [0, 80], [1, 0], { clamp: true })
-  
-  // Parallax effect: image slowly translates downwards as the user scrolls
-  const imageY = useTransform(scrollY, [0, THRESHOLD * 2], ["0%", "7%"])
-
-  return (
-    // Normal-flow container — height creates the scroll travel for the sticky child
-    <div style={{ height: `calc(100vh + ${THRESHOLD}px)`, position: "relative" }}>
-      {/* Sticky child — stays pinned while scrollY is 0 → THRESHOLD, then scrolls away */}
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-          overflow: "hidden",
-          background: "#1a1a1a",
-        }}
-      >
-        {/* Full-bleed image with scroll-driven clip-path reveal */}
-        <motion.img
-          src="/landd.JPG.jpeg"
-          alt="The Fresh Factory storefront"
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "30% center",
-            scale: 1.15,
-            y: imageY,
-            clipPath,
-          }}
-        />
-
-        {/* Title text — fades out on first scroll */}
-        <motion.div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "flex-start",
-            paddingTop: "6vh",
-            pointerEvents: "none",
-            opacity: textOpacity,
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "var(--font-sans)",
-              fontSize: "clamp(42px, 8.5vw, 160px)",
-              fontWeight: 700,
-              letterSpacing: "-0.03em",
-              lineHeight: 1,
-              textTransform: "uppercase",
-              color: "#FFFFFF",
-              textAlign: "center",
-              userSelect: "none",
-            }}
-          >
-            The &nbsp; Fresh &nbsp; Factory
-          </div>
-          <div
-            style={{
-              marginTop: "12px",
-              fontFamily: "var(--font-sans)",
-              fontSize: "13px",
-              fontWeight: 400,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.55)",
-              textAlign: "center",
-              maxWidth: "480px",
-              userSelect: "none",
-            }}
-          >
-            A clean eating ecosystem. Constantly seeking fresh energies!
-          </div>
-        </motion.div>
-      </div>
-    </div>
-  )
+            </div>
+        </div>
+    )
 }

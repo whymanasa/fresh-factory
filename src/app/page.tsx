@@ -11,7 +11,7 @@ import ScrollHero from "@/components/ScrollHero";
 import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
-  const menuSectionRef    = useRef<HTMLDivElement>(null)
+  const menuSectionRef = useRef<HTMLDivElement>(null)
   const farmersSectionRef = useRef<HTMLDivElement>(null)
 
   return (
