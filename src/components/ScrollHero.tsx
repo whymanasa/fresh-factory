@@ -95,23 +95,25 @@ export default function ScrollHero() {
                     zIndex: 10,
                 }}
             >
-                <div style={{ maxWidth: "600px" }}>
-                    <p style={{
+                <div style={{ maxWidth: "850px" }}>
+                    <div style={{
                         fontFamily: "'Courier New', Courier, monospace", // Typewriter style
-                        fontSize: "clamp(18px, 2vw, 28px)", // Much bigger
-                        lineHeight: 1.4,
+                        fontSize: "clamp(18px, 2.4vw, 32px)", // Slightly bigger, yet responsive
+                        lineHeight: 1.3,
                         margin: 0,
                         fontWeight: 600, // Bold
                         color: "#000000",
                         textTransform: "uppercase",
-                        letterSpacing: "0.06em",
+                        letterSpacing: "0.04em",
                     }}>
                         A clean eating ecosystem.<br />
-                        <TypewriterText 
-                            strings={["Constantly seeking fresh energies!!", "Trust the process, not the processed.", "An ingredient-first destination."]} 
-                            delay={3000} 
-                        />
-                    </p>
+                        <div style={{ whiteSpace: "nowrap", overflow: "hidden", display: "inline-block", width: "100%" }}>
+                            <TypewriterText 
+                                strings={["Constantly seeking fresh energies!!", "Trust the process, not the processed.", "Pure fuel for peak performance."]} 
+                                delay={3000} 
+                            />
+                        </div>
+                    </div>
                     <div style={{
                         marginTop: "24px",
                         fontFamily: "'Courier New', Courier, monospace",

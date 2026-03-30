@@ -55,8 +55,8 @@ export default function EnvelopeLetter() {
       gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "bottom 120%", 
-          end: "bottom 90%", 
+          start: "bottom 120%",
+          end: "bottom 90%",
           scrub: 1.4, // Snappier exit
         },
       }).to(groupRef.current, { scale: 0.94, opacity: 0.8, ease: "power1.inOut" })
@@ -127,13 +127,33 @@ export default function EnvelopeLetter() {
               backgroundColor: "#F4EFE6", // Cream paper for realism
               boxShadow: "0 -8px 24px rgba(0,0,0,0.15)",
               borderRadius: 1,
-              padding: "clamp(24px, 4vw, 56px) clamp(22px, 3.5vw, 52px)",
-              overflowY: "auto",
+              padding: "clamp(24px, 4vh, 60px) clamp(22px, 3.5vw, 52px)", // Vertical padding using vh
+              overflowY: "auto", // Allow scroll but hide "ugly" bar
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              scrollbarWidth: "thin", // For Firefox
+              scrollbarColor: "rgba(26,23,20,0.15) transparent", // For Firefox
             }}
+            className="letter-paper-scroll"
           >
+            {/* Custom scrollbar styles for Webkit (Chrome/Safari) */}
+            <style>{`
+              .letter-paper-scroll::-webkit-scrollbar {
+                width: 4px;
+              }
+              .letter-paper-scroll::-webkit-scrollbar-track {
+                background: transparent;
+              }
+              .letter-paper-scroll::-webkit-scrollbar-thumb {
+                background: rgba(26,23,20,0.15);
+                border-radius: 20px;
+              }
+              .letter-paper-scroll::-webkit-scrollbar-thumb:hover {
+                background: rgba(26,23,20,0.25);
+              }
+            `}</style>
+
             {/* Subtle Crease Lines on Inner Letter */}
             <svg
               style={{
@@ -153,69 +173,48 @@ export default function EnvelopeLetter() {
               <line x1="50" y1="0" x2="50" y2="100" stroke="#000" strokeWidth="0.15" />
             </svg>
 
-            {/* Heading */}
-            <div style={{ marginBottom: "clamp(20px, 3vw, 40px)", marginTop: "10px", textAlign: "center", zIndex: 2 }}>
-                <h2 style={{
-                    fontFamily: "var(--font-serif)",
-                    fontSize: "clamp(24px, 4.5vw, 46px)", // Much larger heading
-                    fontWeight: 300,
-                    letterSpacing: "0.15em",
-                    color: INK,
-                    lineHeight: 1.4,
-                    textTransform: "uppercase",
-                    whiteSpace: "pre-line"
-                }}>
-                    AN{"\n"}INGREDIENT-{"\n"}FIRST{"\n"}DINING{"\n"}DESTINATION
-                </h2>
-            </div>
-            
-            {/* Body */}
-            <div style={{ maxWidth: "560px", marginBottom: "clamp(20px, 3vw, 50px)", textAlign: "center", zIndex: 2 }}>
-                <p style={{
-                    fontFamily: "var(--font-serif)",
-                    fontSize: "clamp(13.5px, 1.5vw, 16px)", // Increased from 12px
-                    fontWeight: 300,
-                    lineHeight: 2.1,
-                    color: INK_MUTED,
-                    marginBottom: "20px",
-                    letterSpacing: "0.03em"
-                }}>
-                    Where ingredient precision meets modern indulgence. The Fresh Factory transforms a market basket into a seasonal dining destination, alive from first morning light to the final cold brew.
-                </p>
-                <p style={{
-                    fontFamily: "var(--font-serif)",
-                    fontSize: "clamp(13.5px, 1.5vw, 16px)", // Increased from 12px
-                    fontWeight: 300,
-                    lineHeight: 2.1,
-                    color: INK_MUTED,
-                    letterSpacing: "0.03em"
-                }}>
-                    Curated breakfast service, vibrant midday bowls and elevated evening sips set the tempo for an experience that feels both honest and intimate.
-                </p>
+            {/* Heading — Significantly larger and centered for better space usage */}
+            <div style={{ marginBottom: "clamp(28px, 5.5vh, 75px)", textAlign: "center", zIndex: 2 }}>
+              <h1 style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(30px, 7.5vh, 58px)", // Reduced from 64px for refinement
+                fontWeight: 300,
+                letterSpacing: "0.15em",
+                color: INK,
+                lineHeight: 1.05, // Added tiny bit more leading
+                textTransform: "uppercase",
+                textWrap: "balance",
+                maxWidth: "780px",
+                margin: "0 auto",
+              }}>
+                AN INGREDIENT-FIRST<br />DINING DESTINATION
+              </h1>
             </div>
 
-            {/* Nav links */}
-            <nav style={{ display: "flex", gap: "clamp(20px, 4vw, 50px)", justifyContent: "center", zIndex: 2 }}>
-              {["MENU", "RESERVATIONS", "VISIT"].map((label) => (
-                <a
-                  key={label}
-                  href="#"
-                  style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: "11px", // Increased from 9px
-                    letterSpacing: "0.3em",
-                    color: INK,
-                    textDecoration: "none",
-                    textTransform: "uppercase",
-                    paddingBottom: "8px",
-                    borderBottom: "1px solid rgba(26,23,20,0.3)",
-                    opacity: 0.8,
-                  }}
-                >
-                  {label}
-                </a>
-              ))}
-            </nav>
+            {/* Body — Larger and better spaced */}
+            <div style={{ maxWidth: "620px", textAlign: "center", zIndex: 2 }}>
+              <p style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(15.5px, 2.1vh, 20px)", // Reduced slightly from 22px
+                fontWeight: 300,
+                lineHeight: 1.85,
+                color: INK_MUTED,
+                marginBottom: "30px",
+                letterSpacing: "0.03em"
+              }}>
+                Where ingredient precision meets modern indulgence. The Fresh Factory transforms a market basket into a seasonal dining destination, alive from first morning light to the final cold brew.
+              </p>
+              <p style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(15.5px, 2.1vh, 20px)",
+                fontWeight: 300,
+                lineHeight: 1.85,
+                color: INK_MUTED,
+                letterSpacing: "0.03em"
+              }}>
+                Curated breakfast service, vibrant midday bowls and elevated evening sips set the tempo for an experience that feels both honest and intimate.
+              </p>
+            </div>
           </div>
 
           {/* ── Layer 3: Envelope front face (stamp + address + border — dissolves away) */}
@@ -270,20 +269,20 @@ export default function EnvelopeLetter() {
 
             {/* Postmark stamp on envelope cover */}
             <div style={{
-                position: "absolute",
-                top: "clamp(24px, 4.5vw, 48px)",
-                right: "clamp(24px, 5vw, 48px)",
-                opacity: 0.45,
+              position: "absolute",
+              top: "clamp(24px, 4.5vw, 48px)",
+              right: "clamp(24px, 5vw, 48px)",
+              opacity: 0.45,
             }}>
-                <svg width="80" height="80" viewBox="0 0 68 68" fill="none">
-                    <circle cx="34" cy="34" r="30" stroke={INK} strokeWidth="1.2" />
-                    <circle cx="34" cy="34" r="23" stroke={INK} strokeWidth="0.6" />
-                    <path d="M15 30 Q22 26 29 30 Q36 34 43 30 Q50 26 57 30" stroke={INK} strokeWidth="1" fill="none" />
-                    <path d="M15 34 Q22 30 29 34 Q36 38 43 34 Q50 30 57 34" stroke={INK} strokeWidth="1" fill="none" />
-                    <path d="M15 38 Q22 34 29 38 Q36 42 43 38 Q50 34 57 38" stroke={INK} strokeWidth="1" fill="none" />
-                    <text x="34" y="18" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="5" letterSpacing="0.6">BENGALURU</text>
-                    <text x="34" y="56" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="4.5" letterSpacing="0.4">560001</text>
-                </svg>
+              <svg width="80" height="80" viewBox="0 0 68 68" fill="none">
+                <circle cx="34" cy="34" r="30" stroke={INK} strokeWidth="1.2" />
+                <circle cx="34" cy="34" r="23" stroke={INK} strokeWidth="0.6" />
+                <path d="M15 30 Q22 26 29 30 Q36 34 43 30 Q50 26 57 30" stroke={INK} strokeWidth="1" fill="none" />
+                <path d="M15 34 Q22 30 29 34 Q36 38 43 34 Q50 30 57 34" stroke={INK} strokeWidth="1" fill="none" />
+                <path d="M15 38 Q22 34 29 38 Q36 42 43 38 Q50 34 57 38" stroke={INK} strokeWidth="1" fill="none" />
+                <text x="34" y="18" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="5" letterSpacing="0.6">BENGALURU</text>
+                <text x="34" y="56" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="4.5" letterSpacing="0.4">560001</text>
+              </svg>
             </div>
 
             {/* Bottom V crease lines (decorative) */}
