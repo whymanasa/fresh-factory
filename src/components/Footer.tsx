@@ -20,7 +20,7 @@ export default function Footer() {
       }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        
+
         {/* ── Centered Logo ── */}
         <div style={{ position: "relative", width: "240px", height: "120px", margin: "0 auto 80px" }}>
           <Image
@@ -46,16 +46,16 @@ export default function Footer() {
           <div style={{ textAlign: "left" }}>
             <h4 style={labelStyle}>Opening Hours</h4>
             <div style={{ marginTop: "20px" }}>
-              <p style={detailStyle}>MON TO THURS — 7AM - 4PM</p>
-              <p style={detailStyle}>FRI TO SUN — 7AM - 5PM</p>
+              <p style={detailStyle}>MON TO THURS — 8AM - 11PM</p>
+              <p style={detailStyle}>FRI TO SUN — 8AM - 11PM</p>
             </div>
           </div>
 
           {/* Center: Contact & Address */}
           <div>
             <p style={detailStyle}>NO. 42, 10TH MAIN ROAD,</p>
-            <p style={detailStyle}>INDIRANAGAR, BENGALURU 560038</p>
-            
+            <p style={detailStyle}>INDIRANAGAR, BANGALORE 560038</p>
+
             <div style={{ marginTop: "24px" }}>
               <p style={detailStyle}>HELLO@FRESHFACTORY.COM</p>
               <p style={detailStyle}>+91 80 4567 8901</p>
@@ -87,13 +87,13 @@ export default function Footer() {
           </p>
           <div style={{ display: "flex", gap: "32px" }}>
             {["CHIEF", "CULTURE", "COLLECTIVE", "PRIVACY", "TERMS"].map(item => (
-                <Link 
-                    key={item} 
-                    href="#" 
-                    style={{ fontSize: "10px", letterSpacing: "0.15em", opacity: 0.4, textTransform: "uppercase", textDecoration: "none", color: "white" }}
-                >
-                    {item}
-                </Link>
+              <Link
+                key={item}
+                href="#"
+                style={{ fontSize: "10px", letterSpacing: "0.15em", opacity: 0.4, textTransform: "uppercase", textDecoration: "none", color: "white" }}
+              >
+                {item}
+              </Link>
             ))}
           </div>
         </div>

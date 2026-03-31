@@ -147,8 +147,8 @@ export default function UnfoldingLetter() {
                 opacity: 0.6
             }}>
                 The Fresh Factory<br />
-                Koramangala, Bengaluru<br />
-                India — 560 034
+                Indiranagar, Bangalore<br />
+                India — 560 038
             </p>
         </div>
 
@@ -167,8 +167,8 @@ export default function UnfoldingLetter() {
                 <path d="M15 30 Q22 26 29 30 Q36 34 43 30 Q50 26 57 30" stroke={INK} strokeWidth="1" fill="none" />
                 <path d="M15 34 Q22 30 29 34 Q36 38 43 34 Q50 30 57 34" stroke={INK} strokeWidth="1" fill="none" />
                 <path d="M15 38 Q22 34 29 38 Q36 42 43 38 Q50 34 57 38" stroke={INK} strokeWidth="1" fill="none" />
-                <text x="34" y="18" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="5" letterSpacing="0.6">BENGALURU</text>
-                <text x="34" y="56" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="4.5" letterSpacing="0.4">560001</text>
+                <text x="34" y="18" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="5" letterSpacing="0.6">BANGALORE</text>
+                <text x="34" y="56" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="4.5" letterSpacing="0.4">560038</text>
             </svg>
         </div>
 

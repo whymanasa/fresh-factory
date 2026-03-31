@@ -24,7 +24,7 @@ function Postmark() {
       <path d="M15 30 Q22 26 29 30 Q36 34 43 30 Q50 26 57 30" stroke={INK} strokeWidth="1" fill="none" />
       <path d="M15 34 Q22 30 29 34 Q36 38 43 34 Q50 30 57 34" stroke={INK} strokeWidth="1" fill="none" />
       <path d="M15 38 Q22 34 29 38 Q36 42 43 38 Q50 34 57 38" stroke={INK} strokeWidth="1" fill="none" />
-      <text x="34" y="18" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="5" letterSpacing="0.6">BENGALURU</text>
+      <text x="34" y="18" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="5" letterSpacing="0.6">BANGALORE</text>
       <text x="34" y="56" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="4.5" letterSpacing="0.4">560001</text>
     </svg>
   )
@@ -188,7 +188,7 @@ const labelStyle: React.CSSProperties = {
 
 const headingStyle: React.CSSProperties = {
   fontFamily: "var(--font-serif)",
-  fontSize: "clamp(22px,3.2vw,42px)",
+  fontSize: "clamp(26px,3.8vw,48px)",
   fontWeight: 300,
   letterSpacing: "0.04em",
   color: INK,
@@ -199,7 +199,7 @@ const headingStyle: React.CSSProperties = {
 
 const bodyStyle: React.CSSProperties = {
   fontFamily: "var(--font-serif)",
-  fontSize: "clamp(13px,1.3vw,16px)",
+  fontSize: "clamp(15px,1.6vw,20px)",
   fontWeight: 300,
   lineHeight: 1.85,
   color: INK_MUTED,
@@ -217,7 +217,7 @@ const menuTimeStyle: React.CSSProperties = {
 
 const menuDishStyle: React.CSSProperties = {
   fontFamily: "var(--font-serif)",
-  fontSize: "clamp(13px,1.4vw,17px)",
+  fontSize: "clamp(15px,1.8vw,22px)",
   fontStyle: "italic",
   fontWeight: 400,
   color: INK,
@@ -226,7 +226,7 @@ const menuDishStyle: React.CSSProperties = {
 
 const menuNoteStyle: React.CSSProperties = {
   fontFamily: "var(--font-serif)",
-  fontSize: "clamp(11px,1.1vw,14px)",
+  fontSize: "clamp(13px,1.3vw,16px)",
   fontWeight: 300,
   color: INK_MUTED,
   lineHeight: 1.65,

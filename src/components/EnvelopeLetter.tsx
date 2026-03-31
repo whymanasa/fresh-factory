@@ -173,46 +173,58 @@ export default function EnvelopeLetter() {
               <line x1="50" y1="0" x2="50" y2="100" stroke="#000" strokeWidth="0.15" />
             </svg>
 
-            {/* Heading — Significantly larger and centered for better space usage */}
-            <div style={{ marginBottom: "clamp(28px, 5.5vh, 75px)", textAlign: "center", zIndex: 2 }}>
+            {/* Heading — Ingredient-First focus */}
+            <div style={{ marginBottom: "clamp(32px, 6vh, 80px)", textAlign: "center", zIndex: 2 }}>
               <h1 style={{
                 fontFamily: "var(--font-serif)",
-                fontSize: "clamp(30px, 7.5vh, 58px)", // Reduced from 64px for refinement
+                fontSize: "clamp(32px, 8.5vh, 64px)",
                 fontWeight: 300,
-                letterSpacing: "0.15em",
+                letterSpacing: "0.12em",
                 color: INK,
-                lineHeight: 1.05, // Added tiny bit more leading
+                lineHeight: 1.05,
                 textTransform: "uppercase",
                 textWrap: "balance",
-                maxWidth: "780px",
+                maxWidth: "880px",
                 margin: "0 auto",
               }}>
                 AN INGREDIENT-FIRST<br />DINING DESTINATION
               </h1>
             </div>
 
-            {/* Body — Larger and better spaced */}
-            <div style={{ maxWidth: "620px", textAlign: "center", zIndex: 2 }}>
+            {/* Body — Simple & Easy focus */}
+            <div style={{ maxWidth: "600px", textAlign: "left", zIndex: 2 }}>
               <p style={{
                 fontFamily: "var(--font-serif)",
-                fontSize: "clamp(15.5px, 2.1vh, 20px)", // Reduced slightly from 22px
+                fontSize: "clamp(15px, 2.1vh, 18px)",
                 fontWeight: 300,
-                lineHeight: 1.85,
+                lineHeight: 1.7,
                 color: INK_MUTED,
-                marginBottom: "30px",
-                letterSpacing: "0.03em"
+                marginBottom: "24px",
+                letterSpacing: "0.02em"
               }}>
-                Where ingredient precision meets modern indulgence. The Fresh Factory transforms a market basket into a seasonal dining destination, alive from first morning light to the final cold brew.
+                The Fresh Factory is about one simple thing: food that is honest and good for you. We are careful about everything that goes into our kitchen. For us, every ingredient is a choice made for its quality and its journey from the farm to your plate. 
               </p>
               <p style={{
                 fontFamily: "var(--font-serif)",
-                fontSize: "clamp(15.5px, 2.1vh, 20px)",
+                fontSize: "clamp(15px, 2.1vh, 18px)",
                 fontWeight: 300,
-                lineHeight: 1.85,
+                lineHeight: 1.7,
                 color: INK_MUTED,
-                letterSpacing: "0.03em"
+                marginBottom: "24px",
+                letterSpacing: "0.02em"
               }}>
-                Curated breakfast service, vibrant midday bowls and elevated evening sips set the tempo for an experience that feels both honest and intimate.
+                No matter the cuisine, our goal stays the same: we let the ingredient be the hero. We believe in the rhythm of the seasons and work with the farmers who harvest them, ensuring their hard work is felt in every bite.
+              </p>
+              <p style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "clamp(15px, 2.1vh, 18px)",
+                fontWeight: 300,
+                lineHeight: 1.7,
+                color: INK_MUTED,
+                marginBottom: "24px",
+                letterSpacing: "0.02em"
+              }}>
+                In the heart of Indiranagar, we have created a quiet place for people who care about where their food comes from and how it tastes. Here, eating well is an art form.
               </p>
             </div>
           </div>
@@ -249,7 +261,7 @@ export default function EnvelopeLetter() {
                 left: "clamp(24px, 4.5vw, 48px)",
               }}
             >
-              {["The Fresh Factory", "Koramangala, Bengaluru", "India — 560 034"].map((line, i) => (
+              {["The Fresh Factory", "Indiranagar, Bangalore", "India — 560 038"].map((line, i) => (
                 <div
                   key={line}
                   style={{
@@ -280,8 +292,8 @@ export default function EnvelopeLetter() {
                 <path d="M15 30 Q22 26 29 30 Q36 34 43 30 Q50 26 57 30" stroke={INK} strokeWidth="1" fill="none" />
                 <path d="M15 34 Q22 30 29 34 Q36 38 43 34 Q50 30 57 34" stroke={INK} strokeWidth="1" fill="none" />
                 <path d="M15 38 Q22 34 29 38 Q36 42 43 38 Q50 34 57 38" stroke={INK} strokeWidth="1" fill="none" />
-                <text x="34" y="18" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="5" letterSpacing="0.6">BENGALURU</text>
-                <text x="34" y="56" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="4.5" letterSpacing="0.4">560001</text>
+                <text x="34" y="18" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="5" letterSpacing="0.6">BANGALORE</text>
+                <text x="34" y="56" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="4.5" letterSpacing="0.4">560038</text>
               </svg>
             </div>
 

@@ -6,7 +6,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "The Fresh Factory",
-  description: "Bengaluru's ingredient-first café",
+  description: "Bangalore's ingredient-first café",
 };
 
 export default function RootLayout({

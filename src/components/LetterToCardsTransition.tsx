@@ -103,7 +103,7 @@ export default function LetterToCardsTransition() {
         <path d="M48 150 Q68 144 88 150 Q108 156 128 150 Q148 144 168 150 Q188 156 208 150" stroke={INK} strokeWidth="1.4" fill="none" opacity="0.35" />
 
         {/* City name */}
-        <text x="130" y="134" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="10" letterSpacing="2" opacity="0.55">BENGALURU</text>
+        <text x="130" y="134" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="10" letterSpacing="2" opacity="0.55">BANGALORE</text>
         <text x="130" y="150" textAnchor="middle" fill={INK} fontFamily="sans-serif" fontSize="8" letterSpacing="1.5" opacity="0.35">560 034</text>
       </svg>
 
