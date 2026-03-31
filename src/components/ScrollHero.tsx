@@ -108,9 +108,9 @@ export default function ScrollHero() {
                     }}>
                         A clean eating ecosystem.<br />
                         <div style={{ whiteSpace: "nowrap", overflow: "hidden", display: "inline-block", width: "100%" }}>
-                            <TypewriterText 
-                                strings={["Constantly seeking fresh energies!!", "Trust the process, not the processed.", "Pure fuel for peak performance."]} 
-                                delay={3000} 
+                            <TypewriterText
+                                strings={["Constantly seeking fresh energies!!", "Trust the process, not the processed.", "Pure fuel for peak performance."]}
+                                delay={3000}
                             />
                         </div>
                     </div>
@@ -123,7 +123,7 @@ export default function ScrollHero() {
                         textTransform: "uppercase",
                         letterSpacing: "0.15em",
                     }}>
-                        Bangalore | Lucknow
+                        Bangalore | Indiranagar
                     </div>
                 </div>
                 <motion.div
